@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import student from "../Model/student-model";
 import { student_joi } from "../Validators/student-registration-joi";
 
+
 export const addStudent = async (req: Request, res: Response): Promise<Response> => {
     // Validate the incoming request body
     const value = await student_joi.validateAsync(req.body);
@@ -27,10 +28,17 @@ export const addStudent = async (req: Request, res: Response): Promise<Response>
     });
 };
 
+interface StudentData {
+    email: string;
+    name: string;
+    password: string;
+}
+
+
 
 export const allUser = async (req: Request, res: Response): Promise<Response> => {
    
-     const allUser = await student.find()
+     const allUser:StudentData|{} = await student.find()
      if(!allUser){
         return res.json({message:"No user found"})
      }
@@ -38,4 +46,14 @@ export const allUser = async (req: Request, res: Response): Promise<Response> =>
      return res.status(200).json({data:allUser})
 }
 
+export const viewStudentById = async(req:Request,res:Response):Promise<Response> => {
 
+    const id:String = req.params.id
+    const oneUser:StudentData|null = await student.findById(id)
+
+    if(!oneUser){
+        return res.status(404).json({message:'no user found in this id'})
+    }
+
+    return res.status(200).json({data:oneUser})
+}
