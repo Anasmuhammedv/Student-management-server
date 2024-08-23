@@ -2,4 +2,4 @@
 /.env
 /tsconfig.json
 /dist
-/package-lock-json
+/package-lock.json

@@ -1,17 +1,24 @@
 // Import the 'express' module along with 'Request' and 'Response' types from express
 import express, { Request, Response } from 'express';
+import { db_connect } from './dbconnect';
+import studentRoute from './Modules/student-module/Routes/student-route'
 
 // Create an Express application
 const app = express();
 
-// Specify the port number for the server
-const port: number = 3000;
+//middlewares
+app.use(express.json())
 
-// Define a route for the root path ('/')
-app.get('/', (req: Request, res: Response) => {
-  // Send a response to the client
-  res.send('Hello, TypeScript + Node.js + Express!');
-});
+
+//Routes
+
+app.use('/api/users', studentRoute)
+
+//connectiong to Dtabase
+db_connect()
+
+//port number creation
+const port:string|number = process.env.PORT || 3000
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
