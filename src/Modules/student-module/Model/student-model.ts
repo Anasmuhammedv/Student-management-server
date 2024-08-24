@@ -12,6 +12,10 @@ const studentSchema = new mongoose.Schema({
     password:{
        type:String,
        required:true
+    },
+    batch:{
+      type:mongoose.Schema.ObjectId,
+      ref:"batch"
     }
 
 },{timestamps:true})

@@ -6,10 +6,10 @@ const batchSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    students:{
+    students:[{
        type:mongoose.Schema.ObjectId,
        ref:"student"
-    }
+    }]
 
 },{timestamps:true})
 
