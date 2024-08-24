@@ -2,6 +2,7 @@
 import express, { Request, Response } from 'express';
 import { db_connect } from './dbconnect';
 import studentRoute from './Modules/student-module/Routes/student-route'
+import batchRoute from './Modules/batch-module/Routes/batch-route'
 
 // Create an Express application
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json())
 //Routes
 
 app.use('/api/users', studentRoute)
+app.use('/api/batch', batchRoute)
 
 //connectiong to Dtabase
 db_connect()
