@@ -55,8 +55,6 @@ export const newBatch = async (req: Request, res: Response): Promise<Response> =
 
 //add new student 
 
-
-
 export const addStudent = async (req: Request, res: Response): Promise<Response> => {
     const { id: studentId } = req.body;
     const { id: batchId } = req.params;
@@ -90,4 +88,23 @@ export const addStudent = async (req: Request, res: Response): Promise<Response>
 
         return res.status(200).json({ message: "Student successfully added to batch", batch: updatedBatch });
      
+};
+
+
+
+//Get student details in eachbatch
+
+
+
+export const studentBatch = async (req: Request, res: Response): Promise<Response> => {
+    const id: string = req.params.id;
+
+    const batchData = await batch.findById(id).populate({
+        path: 'students' 
+    });
+
+    console.log(batchData);
+    
+
+    return res.json(batchData);
 };

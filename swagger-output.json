@@ -1,0 +1,151 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Student Management tution center",
+      "description": "manages student data",
+      "version": "1.0.0"
+    },
+    "host": "localhost:7907",
+    "basePath": "/",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/api/users/students": {
+        "get": {
+          "summary": "Get All Registered Students",
+          "description": "Retrieve a list of all registered students.",
+          "responses": {
+            "200": {
+              "description": "A list of students.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "603e2a6f13c6ae432abcde12"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "john.doe@example.com"
+                    }
+                
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "No students found."
+            },
+            "500": {
+              "description": "Internal Server Error."
+            }
+          }
+        }
+      },
+      "/api/users/register": {
+        "post": {
+          "summary": "Add New Student",
+          "description": "Add new students with data.",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Student data to be added",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Anas"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "sample@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successfully created"
+            },
+            "500": {
+              "description": "Internal Server Error."
+            }
+          }
+        }
+      },
+
+      "/api/users/students/{id}": {
+        "get": {
+          "summary": "Get Specific Student Data",
+          "description": "View the profile of a specific student.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Student ID from URL",
+              "example": "603e2a6f13c6ae432abcde12"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of student data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "603e2a6f13c6ae432abcde12"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Student not found"
+            },
+            "500": {
+              "description": "Internal Server Error."
+            }
+          }
+        }
+      }
+    }
+    }
+  
+  

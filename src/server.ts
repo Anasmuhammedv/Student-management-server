@@ -3,6 +3,8 @@ import express, { Request, Response } from 'express';
 import { db_connect } from './dbconnect';
 import studentRoute from './Modules/student-module/Routes/student-route'
 import batchRoute from './Modules/batch-module/Routes/batch-route'
+import swaggerUi from "swagger-ui-express"
+import swaggerDocument from '../swagger-output.json'
 
 // Create an Express application
 const app = express();
@@ -10,6 +12,9 @@ const app = express();
 //middlewares
 app.use(express.json())
 
+
+//swagger
+app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument))
 
 //Routes
 

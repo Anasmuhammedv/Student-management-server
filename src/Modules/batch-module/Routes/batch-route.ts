@@ -1,5 +1,5 @@
 import express from 'express'
-import {addStudent, newBatch} from '../controller/batch-controller'
+import {addStudent, newBatch, studentBatch} from '../controller/batch-controller'
 
 const router = express.Router()
 
@@ -7,5 +7,6 @@ const router = express.Router()
 
 router.post('/register',newBatch)
 router.post('/student/:id',addStudent)
+router.get('/student/:id',studentBatch)
 
 export default router
