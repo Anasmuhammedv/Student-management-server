@@ -11,7 +11,7 @@ export const addStudent = async (req: Request, res: Response): Promise<Response>
     //check if user already exist
     const existinguser =await student.findOne({email:value.email})
     if(existinguser){
-       return res.status(404).json({message:"user alreday exist"})
+       return res.status(400).json({message:"user alreday exist"})
     }
 
 
@@ -35,17 +35,20 @@ interface StudentData {
     password: string;
 }
 
-
+//Fetch all user
 
 export const allUser = async (req: Request, res: Response): Promise<Response> => {
    
      const allUser:StudentData|{} = await student.find()
+
      if(!allUser){
         return res.json({message:"No user found"})
      }
 
      return res.status(200).json({data:allUser})
 }
+
+//fetch userById
 
 export const viewStudentById = async(req:Request,res:Response):Promise<Response> => {
 

@@ -103,7 +103,9 @@ export const studentBatch = async (req: Request, res: Response): Promise<Respons
         path: 'students' 
     });
 
-    console.log(batchData);
+    if(!batchData){
+        return res.status(404).json({message:"no batch found in this id"})
+    }
     
 
     return res.json(batchData);

@@ -144,8 +144,144 @@
             }
           }
         }
+      },
+
+      "/api/batch/register": {
+        "post": {
+          "summary": "Add new batch",
+          "description": "Batch name is required",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "new batch added",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Batchname": {
+                    "type": "string",
+                    "example": "your batch name"
+                  }
+                },
+                "required": [
+                  "Batchname"
+                  
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successfully created"
+            },
+            "500": {
+              "description": "Internal Server Error."
+            }
+          }
+        }
+    },
+    "/api/batch/students/{id}": {
+      "get": {
+        "summary": "Get students in a specific batch",
+        "description": "Retrieve a list of students in a specific batch.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Batch ID from URL",
+            "example": "603e2a6f13c6ae432abcde12"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of students in the batch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "603e2a6f13c6ae432abcde12"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Batch not found"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          }
+        }
       }
+    },
+
+    
+    "/api/batch/student/{id}":{
+       
+      "post": {
+        "summary": "Add student to a specific batch",
+        "description": "Add a student to a specific batch using batch ID from the URL and student ID in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Batch ID from URL",
+            "example": "603e2a6f13c6ae432abcde12"  
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "user ID from body",
+            "example": "603e2a6f13c6ae432abcde12"
+          }
+        ],
+       
+        "responses": {
+          "200": {
+            "description": "Successfully added student to batch"
+          },
+          "404": {
+            "description": "Batch or student not found"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          }
+        }
+      }
+    
+        }
+
     }
+
     }
+    
   
   
